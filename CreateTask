@@ -1,0 +1,105 @@
+import pandas as pd
+import random
+import time
+
+# Load the dataset containing words, difficulty levels, and roles
+data = pd.read_csv("MyWordle_dataset.csv")
+
+# Convert the full word column into a list
+word_list = data["word"].tolist()
+
+# Create separate lists for easy and hard words
+easy = data[data["difficulty"]=="easy"]["word"].tolist()
+hard = data[data["difficulty"]=="hard"]["word"].tolist()
+
+# List of valid guess words (if dataset includes them)
+guesses = data[data["role"]=="guess"]["word"].tolist()
+
+def intro():
+    # Simple introduction with timed pauses for effect
+    print("Hello and welcome to GUESS THE WORD!")
+    time.sleep(1)
+    print("You will have 7 guesses to figure out a 5 letter word.")
+    time.sleep(1)
+    print("Each guess or hint (2 per game) will tell you valuable information about the word you are trying to guess.")
+    time.sleep(1)
+    print("The game will tell you which letters are placed in the right location and how many are in the word but in the wrong locations.")
+    time.sleep(1)
+
+def game(difficulty):
+    # Randomly select a word from the chosen difficulty list
+    Word = random.choice(difficulty)
+    print("Your random word has been selected.")
+    
+    victory = False   # Tracks if the player wins
+    hint = 2          # Player starts with 2 hints per game
+
+    for i in range(7):  # Player gets 7 guesses
+        guess = input("Please enter your 5 letter guess or type 'hint': ").lower()
+
+        # Handle hint request
+        if guess == "hint":
+            if hint == 0:
+                print("You have no hints remaining.")
+                continue
+
+            place = int(input("Which position is the letter you would like revealed? (1-5) "))
+
+            # Validate position
+            if place < 1 or place > 5:
+                print("Position is invalid.")
+            else:
+                # Reveal the letter at the chosen position
+                print(f"Your revealed letter is {Word[place-1]}")
+                hint -= 1
+                print(f"You have {hint} hints remaining.")
+            continue
+
+        # Validate guess length
+        if len(guess) != 5:
+            print("Valid guesses must be exactly 5 letters")
+            continue
+
+        # Validate guess exists in the dataset
+        if guess not in word_list:
+            print("Word not in list.")
+            continue
+
+        # Check guess accuracy
+        guess_checker(Word, guess)
+
+        # Check for win condition
+        if guess == Word:
+            print(f"You win! Congratulations! You guessed the word in {i+1} guesses and with {hint} hints remaining!")
+            victory = True
+            break
+
+    # If loop ends without victory
+    if not victory:
+        print(f"You lose. The correct word was {Word}.")
+
+def guess_checker(Word, guess):
+    # Count letters in correct position and letters present but misplaced
+    correct = 0
+    present = 0
+
+    for i in range(5):
+        if guess[i] == Word[i]:
+            correct += 1
+        elif guess[i] in Word:
+            present += 1
+
+    print(f"Correct letters: {correct}, Correct letters but in wrong position: {present}")
+
+# Start game
+intro()
+
+# Ask user for difficulty level
+difficulty = input("Now choose the level of difficulty of the words you will be guessing! (easier or harder) ").lower()
+
+if difficulty == "easier":
+    game(easy)
+elif difficulty == "harder":
+    game(hard)
+else:
+    print("I didn't quite get that, please try again!")
