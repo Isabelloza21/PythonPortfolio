@@ -1,0 +1,50 @@
+# Isa
+# Hogwarts Sorting Program
+# User inputs their name and the program returns their Hogwarts house
+
+import time
+import random
+
+print("Welcome to hogwarts!")
+
+def main():
+    # Ask the user for their name
+    name = input("What is your name: ")
+
+    # Add dramatic pauses to mimic the Sorting Hat thinking
+    time.sleep(1)
+    print("..")
+    time.sleep(1)
+    print("....")
+    time.sleep(1)
+    print("......")
+
+    # Call the house() function and print the result
+    print(house(name))
+
+def house(name):
+    # Check if the name matches known characters and return their house
+    if name == "Harry" or name == "Ron" or name == "Hermione":
+        return "Griffindor"
+    elif name == "Newt" or name == "Nymphadora" or name == "Pomona":
+        return "Hufflepuff"
+    elif name == "Cho" or name == "Luna" or name == "Filius":
+        return "Ravenclaw"
+    elif name == "Voldemort" or name == "Draco" or name == "Severus":
+        return "Slytherin"
+
+    # If the name is not recognized, assign a random house
+    else:
+        value = random.randint(1, 4)  # Random number between 1 and 4
+
+        if value == 1:
+            return "Griffindor"
+        if value == 2:
+            return "Hufflepuff"
+        if value == 3:
+            return "Ravenclaw"
+        if value == 4:
+            return "Slytherin"
+
+# Run the main function
+main()
