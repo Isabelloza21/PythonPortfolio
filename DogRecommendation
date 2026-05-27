@@ -1,0 +1,55 @@
+# Isa
+# Recommend dog breeds based on user input
+
+# Import module to open URLs in the user's browser
+import webbrowser
+
+# List of URLs for each recommended dog breed
+URL =[
+       "https://tinyurl.com/bdcm6cj7",  # Shiba Inu
+       "https://tinyurl.com/bdnprdy6",  # Labrador
+       "https://tinyurl.com/fzxxmef2",  # Bernese Mountain Dog
+       "https://tinyurl.com/yytk9j6u"   # Golden Retriever
+]
+
+# Descriptions for each dog breed (same order as URLs)
+Desc = [
+        "Shiba Inus are independent yet stubborn puppies, highly intelligent but prefer their methods to remain unchanged. They are easy to clean but need training early on to adapt to a schedule. These standards make them easier housepets but not as recommended for first time dog owners.",
+        
+        "Labradors are great for first time dog owners. These sociable pups are gentle in demeanor, making them great houseguests and family pets.",
+        
+        "Bernese Mountain Dogs are better for experienced dog owners but are loyal to the bone. Their constant energy leads to constant care and attention to ensure they aren't destructive. They need a lot of room to grow, so a larger living space is ideal for these gentle giants to thrive.",
+        
+        "Golden Retrievers are sociable and friendly dogs great for first time dog owners. Their energetic personalities light up every household but require more space to truly thrive. With this dog, you are sure to feel GOLDEN."
+]
+
+# Function that recommends a dog breed based on user experience and living space
+def rec():
+       # Ask if the user has owned a dog before
+       own = input("Have you owned a dog before? (yes/no) ")
+
+       # Ask about the size of their living space
+       size = input("Would you describe the space you live in as smaller or larger? (smaller/larger) ")
+
+       # Experienced owner + small space → Shiba Inu
+       if own == "yes" and size == "smaller":
+              webbrowser.open(URL[0])
+              print(Desc[0])
+
+       # Experienced owner + large space → Bernese Mountain Dog
+       if own == "yes" and size == "larger":
+              webbrowser.open(URL[2])
+              print(Desc[2])
+
+       # First-time owner + small space → Labrador
+       if own == "no" and size == "smaller":
+              webbrowser.open(URL[1])
+              print(Desc[1])
+
+       # First-time owner + large space → Golden Retriever
+       if own == "no" and size == "larger":
+              webbrowser.open(URL[3])
+              print(Desc[3])
+
+# Run the recommendation function
+rec()
