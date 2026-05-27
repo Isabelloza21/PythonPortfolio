@@ -1,0 +1,141 @@
+# Isa
+# Rock-Paper-Scissors Game
+# A simulation where the player competes against the computer
+
+import random
+import time
+
+# Main Rock-Paper-Scissors function
+def rps():
+    # Track player performance
+    score = 0   # Number of wins
+    draw = 0    # Number of draws
+    loss = 0    # Number of losses
+
+    # Game loop (runs until the player chooses to stop)
+    while True:
+        print("Welcome to Rock Paper Scissors!")
+        print("Let's shoot on a count of 3!")
+
+        # Countdown for dramatic effect
+        time.sleep(1)
+        print("3...")
+        time.sleep(1)
+        print("2...")
+        time.sleep(1)
+        print("1!")
+
+        # Player chooses Rock, Paper, or Scissors
+        response = input("Rock, Paper, or Scissors: ")
+
+        # Convert player choice into numbers for easier comparison
+        # Paper = 1, Scissors = 2, Rock = 3
+        if response == "Rock":
+            response = 3
+        elif response == "Scissors":
+            response = 2
+        elif response == "Paper":
+            response = 1
+
+        # Computer randomly chooses 1–3
+        csp = random.randint(1, 3)
+
+        # COMPUTER CHOSE PAPER
+        if csp == 1:
+            print("The computer chose Paper")
+            time.sleep(1)
+            print("...")
+
+            # Player also chose Paper → draw
+            if response == 1:
+                draw += 1
+                play = input(f"It's a draw! Wins = {score}, Losses = {loss}, Draws = {draw}. Play again? ")
+                if play == "no":
+                    break
+
+            # Player chose Scissors → win
+            elif response == 2:
+                print("You win!")
+                score += 1
+                play = input(f"Wins = {score}, Losses = {loss}, Draws = {draw}. Play again? ")
+                if play == "no":
+                    break
+
+            # Player chose Rock → loss
+            elif response == 3:
+                print("You Lose! Better luck next time!")
+                loss += 1
+                play = input(f"Wins = {score}, Losses = {loss}, Draws = {draw}. Play again? ")
+                if play == "no":
+                    break
+
+            # Invalid input
+            else:
+                print("Sorry I didn't get that, play again?")
+
+        # COMPUTER CHOSE SCISSORS
+        elif csp == 2:
+            print("The computer chose Scissors")
+            time.sleep(1)
+            print("...")
+
+            # Player also chose Scissors → draw
+            if response == 2:
+                draw += 1
+                play = input(f"It's a draw! Wins = {score}, Losses = {loss}, Draws = {draw}. Play again? ")
+                if play == "no":
+                    break
+
+            # Player chose Rock → win
+            elif response == 3:
+                print("You win!")
+                score += 1
+                play = input(f"Wins = {score}, Losses = {loss}, Draws = {draw}. Play again? ")
+                if play == "no":
+                    break
+
+            # Player chose Paper → loss
+            elif response == 1:
+                print("You Lose! Better luck next time!")
+                loss += 1
+                play = input(f"Wins = {score}, Losses = {loss}, Draws = {draw}. Play again? ")
+                if play == "no":
+                    break
+
+            else:
+                print("Sorry I didn't get that, play again?")
+
+        # COMPUTER CHOSE ROCK
+        elif csp == 3:
+            print("The computer chose Rock")
+            time.sleep(1)
+            print("...")
+
+            # Player also chose Rock → draw
+            if response == 3:
+                draw += 1
+                play = input(f"It's a draw! Wins = {score}, Losses = {loss}, Draws = {draw}. Play again? ")
+                if play == "no":
+                    break
+
+            # Player chose Paper → win
+            elif response == 1:
+                print("You win!")
+                score += 1
+                play = input(f"Wins = {score}, Losses = {loss}, Draws = {draw}. Play again? ")
+                if play == "no":
+                    break
+
+            # Player chose Scissors → loss
+            elif response == 2:
+                print("You Lose! Better luck next time!")
+                loss += 1
+                play = input(f"Wins = {score}, Losses = {loss}, Draws = {draw}. Play again? ")
+                if play == "no":
+                    break
+
+            else:
+                print("Sorry I didn't get that, play again?")
+
+# Run the game
+rps()
