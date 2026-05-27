@@ -1,0 +1,50 @@
+# Isa
+# Madlibs Game
+# Allows the user to input words of their choice into a story they haven't seen yet
+
+# function
+def madlibs():
+    import random  # Import inside function so it only loads when needed
+
+    print("Welcome to Madlibs!")
+
+    # Ask user for a classroom name or choose a random one
+    room = input("Please enter the name of a class or choose random: ")
+    if room == "random":
+        classroom = ["English", "Math", "PE", "Science", "Computer Science", "Choir"]
+        room = random.choice(classroom)  # Randomly pick a classroom
+
+    # Ask user for an item found in the classroom
+    item = input("Please enter an item you would find in this classroom or choose random: ")
+    if item == "random":
+        things = ["chair", "shelf", "desk", "computer", "whiteboard", "door frame"]
+        item = random.choice(things)
+
+    # Ask user for a quote from a movie/show
+    quote = input("Think of a movie or show you saw recently... What was a quote from one of the characters or choose random: ")
+    if quote == "random":
+        snipits = ["Ya like jazz", "Say hello to my little friend", "I'm hotter than you",
+                   "You shall not pass", "Chrissy wake up, I dont like this"]
+        quote = random.choice(snipits)
+
+    # Ask user how the show/movie made them feel
+    emotion = input("How did this show or movie make you feel? Or choose random ")
+    if emotion == "random":
+        feel = ["angery", "happy", "upset", "anxious", "disgusted"]
+        emotion = random.choice(feel)
+
+    # Ask user for their reaction to the ending
+    reaction = input("What was your reaction to the end of this show or movie? Or choose random ")
+    if reaction == "random":
+        end = ["angery", "happy", "upset", "anxious", "disgusted"]
+        reaction = random.choice(end)
+
+    # Print the final Madlibs story
+    # \033[1m and \033[0m make the text bold in the terminal
+    print(f"""I was falling alseep in \033[1m{room.upper()}\033[0m when I suddenly lept onto the nearby \033[1m{item.upper()}\033[0m with a burst of energy.
+    The teacher was so \033[1m{emotion.upper()}\033[0m about my actions. I saw them staring and screamed \033[1m{quote.upper()}\033[0m.
+    The classroom was \033[1m{reaction.upper()}\033[0m to see outburst, but then I felt someone touch my arm.
+    It was my teacher waking me up, I was asleep the whole time!""")
+
+# Main
+madlibs()
